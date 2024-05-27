@@ -25,7 +25,7 @@ The E-Scoring System is a web-based application designed to streamline scoring p
 
 ### Installation
 
-1. Clone the repository: `git clone https://github.com/YourUsername/E-Scoring-System.git`
+1. Clone the repository: `git clone https://github.com/kasturikara/lucky-cat.git`
 2. Install dependencies: `npm install`
 3. Set up database: Configure your MySQL database and update the connection details in the `config.js` file.
 4. Run the application: `node app.js`
@@ -40,7 +40,7 @@ This project is licensed under the MIT License. See the `LICENSE` file for detai
 
 ### Contact
 
-For any questions or issues, please contact [littlecommander46@gmail.com](mailto:littlecommander46@gmail.com) or visit our [Kasturikara](https://github.com/Kasturikara/E-Scoring-System-v1).
+For any questions or issues, please contact [littlecommander46@gmail.com](mailto:littlecommander46@gmail.com) or visit our [Kasturikara](https://github.com/kasturikara/lucky-cat.git).
 
 ### Credits
 
