@@ -10,19 +10,31 @@ import LoginPages from "./features/auth/pages";
 import { useEffect } from "react";
 
 function App() {
-  const [isLogin, setIsLogin, role] = useAppStore(
-    useShallow((state) => [state.isLogin, state.setIsLogin, state.role])
+  const [isLoading, setIsLoading, isLogin, setIsLogin, role] = useAppStore(
+    useShallow((state) => [
+      state.isLoading,
+      state.setIsLoading,
+      state.isLogin,
+      state.setIsLogin,
+      state.role,
+    ])
   );
 
   useEffect(() => {
+    setIsLoading(true);
     if (localStorage.getItem("juri")) {
       setIsLogin(true);
     }
+    setIsLoading(false);
   }, []);
 
   return (
     <div className="min-h-screen bg-slate-200 text-slate-900">
-      {!isLogin ? (
+      {isLoading ? (
+        <div className="flex items-center justify-center min-h-screen">
+          <div className="w-16 h-16 border-4 border-dashed rounded-full animate-spin border-violet-600"></div>
+        </div>
+      ) : !isLogin ? (
         <LoginPages />
       ) : (
         (role === "admin" && (

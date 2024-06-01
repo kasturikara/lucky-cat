@@ -1,7 +1,6 @@
 // lib
 import { Link, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Swal from "sweetalert2";
 // store
 import useAppStore from "src/store/useAppStore";
 import { useShallow } from "zustand/react/shallow";
@@ -18,7 +17,6 @@ import {
   Fire,
   MarkerCircle,
   PencilCircle,
-  SignOut,
   SquaresFour,
   Users,
   UsersThree,
@@ -47,23 +45,6 @@ const Sidebar = () => {
 
     fetchData();
   }, []);
-
-  const handleLogout = () => {
-    Swal.fire({
-      title: "Apakah anda yakin?",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Ya, Keluar!",
-      cancelButtonText: "Batal",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        localStorage.clear();
-        window.location.href = "/";
-      }
-    });
-  };
 
   return (
     <aside
@@ -485,17 +466,6 @@ const Sidebar = () => {
                     </Link>
                   </li>
                 ))}
-            </li>
-
-            {/* Logout */}
-            <li className="rounded-md">
-              <button
-                onClick={handleLogout}
-                className="flex items-center w-full p-2 space-x-3 hover:bg-slate-700"
-              >
-                <SignOut size={28} />
-                <span>Logout</span>
-              </button>
             </li>
           </ul>
         </div>

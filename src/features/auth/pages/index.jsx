@@ -31,7 +31,7 @@ function LoginPages() {
   return (
     <div className="flex flex-col items-center justify-center min-h-screen">
       <div className="w-11/12 shadow-2xl md:w-1/3">
-        <div className="w-full p-4 text-xl font-semibold rounded-t-lg md:text-2xl bg-violet-800 text-slate-50">
+        <div className="w-full p-4 text-xl font-semibold rounded-t-lg md:text-2xl bg-sky-800 text-slate-50">
           Masuk ke Akun Anda
         </div>
         <form className="container flex flex-col p-4 mx-auto rounded-b-lg bg-slate-50 text-slate-900">
@@ -41,7 +41,7 @@ function LoginPages() {
               Username
             </label>
             <div className="flex">
-              <span className="flex items-center px-3 text-sm pointer-events-none rounded-l-md bg-violet-300">
+              <span className="flex items-center px-3 text-sm pointer-events-none rounded-l-md bg-sky-300">
                 <UserCircle size={30} />
               </span>
               <input
@@ -49,7 +49,7 @@ function LoginPages() {
                 name="username"
                 id="username"
                 placeholder="Username..."
-                className="flex flex-1 h-10 p-4 text-sm text-gray-800 bg-gray-100 border border-gray-300 rounded-r-md focus:ring-inset focus:ring-violet-600"
+                className="flex flex-1 h-10 p-4 text-sm text-gray-800 bg-gray-100 border border-gray-300 rounded-r-md focus:ring-inset focus:ring-sky-600"
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -61,7 +61,7 @@ function LoginPages() {
               Password
             </label>
             <div className="flex">
-              <span className="flex items-center px-3 pointer-events-none sm:text-sm rounded-l-md bg-violet-300">
+              <span className="flex items-center px-3 pointer-events-none sm:text-sm rounded-l-md bg-sky-300">
                 <LockKey size={30} />
               </span>
               <input
@@ -69,7 +69,7 @@ function LoginPages() {
                 name="password"
                 id="password"
                 placeholder="*****"
-                className="flex flex-1 h-10 p-4 text-gray-800 bg-gray-100 border border-gray-300 sm:text-sm rounded-r-md focus:ring-inset focus:ring-violet-600"
+                className="flex flex-1 h-10 p-4 text-gray-800 bg-gray-100 border border-gray-300 sm:text-sm rounded-r-md focus:ring-inset focus:ring-sky-600"
                 autoComplete="off"
                 onChange={handleChange}
               />
@@ -77,7 +77,7 @@ function LoginPages() {
           </div>
           {/* Button */}
           <button
-            className="w-full h-10 mt-4 font-semibold rounded text-slate-50 bg-violet-800 hover:bg-violet-600"
+            className="w-full h-10 mt-4 font-semibold rounded text-slate-50 bg-sky-800 hover:bg-sky-600"
             type="button"
             onClick={handleSubmit}
           >
