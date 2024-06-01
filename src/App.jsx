@@ -1,6 +1,10 @@
 // store
 import useAppStore from "./store/useAppStore";
 import { useShallow } from "zustand/react/shallow";
+// layout
+import AdminLayout from "./features/admin/layout";
+// routes
+import AdminRoutes from "./features/admin/routes";
 // pages
 import LoginPages from "./features/auth/pages";
 import { useEffect } from "react";
@@ -21,7 +25,11 @@ function App() {
       {!isLogin ? (
         <LoginPages />
       ) : (
-        (role === "admin" && <p>Admin</p>) ||
+        (role === "admin" && (
+          <AdminLayout>
+            <AdminRoutes />
+          </AdminLayout>
+        )) ||
         (role === "pbb" && <p>Peserta</p>) ||
         (role === "varfor" && <p>VarFor</p>) ||
         (role === "kos" && <p>Kos</p>)

@@ -11,22 +11,39 @@ import SubsKosPages from "../pages/subs/kos";
 import KategoriPages from "../pages/subs/kategori";
 import TotalSmpPages from "../pages/total/smp";
 import TotalSmaPages from "../pages/total/sma";
+import useAppStore from "src/store/useAppStore";
+import { useShallow } from "zustand/react/shallow";
+import PenilaianSmpPages from "../pages/penilaian/smp";
 
 function AdminRoutes() {
+  const routes = [
+    { path: "/", element: <DashboardPages /> },
+    { path: "/juri", element: <JuriPages /> },
+    { path: "/peserta/smp", element: <PesertaSmpPages /> },
+    { path: "/peserta/sma", element: <PesertaSmaPages /> },
+    { path: "/subs/pbb", element: <SubsPbbPages /> },
+    { path: "/subs/dan", element: <SubsDanPages /> },
+    { path: "/subs/var", element: <SubsVarPages /> },
+    { path: "/subs/for", element: <SubsForPages /> },
+    { path: "/subs/kos", element: <SubsKosPages /> },
+    { path: "/subs/kategori", element: <KategoriPages /> },
+    { path: "/total/smp", element: <TotalSmpPages /> },
+    { path: "/total/sma", element: <TotalSmaPages /> },
+  ];
+  const { jumlahSmp } = useAppStore(
+    useShallow((state) => ({ jumlahSmp: state.jumlahSmp }))
+  );
+
+  const penilaianSmpRoutes = Array.from({ length: jumlahSmp }, (_, index) => ({
+    path: `/penilaian/smp/${index + 1}`,
+    element: <PenilaianSmpPages no={index + 1} />,
+  }));
+
   return (
     <Routes>
-      <Route path="/" element={<DashboardPages />} />
-      <Route path="/juri" element={<JuriPages />} />
-      <Route path="/peserta/smp" element={<PesertaSmpPages />} />
-      <Route path="/peserta/sma" element={<PesertaSmaPages />} />
-      <Route path="/subs/pbb" element={<SubsPbbPages />} />
-      <Route path="/subs/dan" element={<SubsDanPages />} />
-      <Route path="/subs/var" element={<SubsVarPages />} />
-      <Route path="/subs/for" element={<SubsForPages />} />
-      <Route path="/subs/kos" element={<SubsKosPages />} />
-      <Route path="/subs/kategori" element={<KategoriPages />} />
-      <Route path="/total/smp" element={<TotalSmpPages />} />
-      <Route path="/total/sma" element={<TotalSmaPages />} />
+      {[...routes, ...penilaianSmpRoutes].map(({ path, element }) => (
+        <Route key={path} path={path} element={element} />
+      ))}
     </Routes>
   );
 }
