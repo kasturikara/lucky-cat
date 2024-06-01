@@ -13,8 +13,10 @@
     "@phosphor-icons/react": "^2.1.5",
     "@supabase/supabase-js": "^2.43.4",
     "react": "^18.2.0",
+    "react-data-table-component": "^7.6.2",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.23.1",
+    "styled-components": "^6.1.11",
     "sweetalert2": "^11.11.0",
     "zustand": "^4.5.2"
   },

@@ -13,3 +13,17 @@ export async function getPeserta(tingkat) {
 
   return data;
 }
+
+// juri
+export async function getJuri() {
+  const { data, error } = await supabase
+    .from("juri")
+    .select("*")
+    .order("role", { ascending: true });
+  if (!data || error) {
+    console.error(error);
+    return;
+  }
+
+  return data;
+}
