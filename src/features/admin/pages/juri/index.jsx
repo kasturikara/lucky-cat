@@ -1,39 +1,18 @@
+// lib
 import { useEffect, useState } from "react";
-import DataTable from "react-data-table-component";
-import { getJuri } from "../../api";
-import useAppStore from "src/store/useAppStore";
+// store
 import { useShallow } from "zustand/react/shallow";
+import useAppStore from "src/store/useAppStore";
+// api
+import { getJuri } from "../../api";
+import { Table } from "flowbite-react";
+// components
 
 function JuriPages() {
   const [isLoading, setIsLoading] = useAppStore(
     useShallow((state) => [state.isLoading, state.setIsLoading])
   );
   const [dataJuri, setDataJuri] = useState([]);
-  const columns = [
-    {
-      id: "id",
-      name: "No.",
-      selector: (_, index) => index + 1,
-      width: "56px",
-    },
-    {
-      name: "Nama",
-      selector: (row) => row.nama,
-    },
-    {
-      name: "Role",
-      selector: (row) => row.role.toUpperCase(),
-      sortable: true,
-    },
-    {
-      name: "Username",
-      selector: (row) => row.username,
-    },
-    {
-      name: "Password",
-      selector: (row) => row.password,
-    },
-  ];
 
   useEffect(() => {
     setIsLoading(true);
@@ -53,20 +32,43 @@ function JuriPages() {
       </div>
 
       <div className="p-4 mt-8 rounded-lg bg-slate-50">
-        <div className=""></div>
+        {/* <div className=""></div> */}
         <div className="overflow-x-auto">
-          <DataTable
-            columns={columns}
-            data={dataJuri}
-            direction="auto"
-            fixedHeader
-            fixedHeaderScrollHeight="500px"
-            highlightOnHover
-            responsive
-            pagination
-            striped
-            progressPending={isLoading}
-          />
+          <Table striped>
+            <Table.Head className="text-center bg-sky-500 text-slate-50">
+              <Table.HeadCell className="w-12 bg-inherit">No</Table.HeadCell>
+              <Table.HeadCell className="bg-inherit">Role</Table.HeadCell>
+              <Table.HeadCell className="bg-inherit">Nama</Table.HeadCell>
+              <Table.HeadCell className="bg-inherit">Username</Table.HeadCell>
+              <Table.HeadCell className="bg-inherit">Password</Table.HeadCell>
+            </Table.Head>
+            <Table.Body>
+              {isLoading ? (
+                <Table.Row>
+                  <Table.Cell>Loading...</Table.Cell>
+                </Table.Row>
+              ) : dataJuri.length === 0 ? (
+                <Table.Row>
+                  <Table.Cell>No Data</Table.Cell>
+                </Table.Row>
+              ) : (
+                dataJuri.map((juri, index) => (
+                  <Table.Row
+                    key={juri.id}
+                    className="text-center hover:bg-sky-100 even:bg-slate-100"
+                  >
+                    <Table.Cell className="font-semibold">
+                      {index + 1}
+                    </Table.Cell>
+                    <Table.Cell>{juri.role}</Table.Cell>
+                    <Table.Cell>{juri.nama}</Table.Cell>
+                    <Table.Cell>{juri.username}</Table.Cell>
+                    <Table.Cell>{juri.password}</Table.Cell>
+                  </Table.Row>
+                ))
+              )}
+            </Table.Body>
+          </Table>
         </div>
       </div>
     </div>
