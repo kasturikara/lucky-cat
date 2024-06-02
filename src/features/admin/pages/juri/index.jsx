@@ -1,28 +1,23 @@
 // lib
 import { useEffect, useState } from "react";
-// store
-import { useShallow } from "zustand/react/shallow";
-import useAppStore from "src/store/useAppStore";
 // api
 import { getJuri } from "../../api";
 import { Table } from "flowbite-react";
 // components
 
 function JuriPages() {
-  const [isLoading, setIsLoading] = useAppStore(
-    useShallow((state) => [state.isLoading, state.setIsLoading])
-  );
+  const [loading, setLoading] = useState(true);
   const [dataJuri, setDataJuri] = useState([]);
 
   useEffect(() => {
-    setIsLoading(true);
+    setLoading(true);
     async function fetchData() {
       const dataJuri = await getJuri();
       setDataJuri(dataJuri);
     }
 
     fetchData();
-    setIsLoading(false);
+    setLoading(false);
   }, []);
 
   return (
@@ -43,7 +38,7 @@ function JuriPages() {
               <Table.HeadCell className="bg-inherit">Password</Table.HeadCell>
             </Table.Head>
             <Table.Body>
-              {isLoading ? (
+              {loading ? (
                 <Table.Row>
                   <Table.Cell>Loading...</Table.Cell>
                 </Table.Row>

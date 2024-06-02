@@ -1,5 +1,6 @@
 import { supabase } from "src/services/supabase/SupabaseClient";
 
+// peserta
 export async function getPeserta(tingkat) {
   const { data, error } = await supabase
     .from("peserta")
