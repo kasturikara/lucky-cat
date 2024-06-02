@@ -1,7 +1,8 @@
 import { LockKey, UserCircle } from "@phosphor-icons/react";
 import { useState } from "react";
-import { matchUser } from "./api";
+import { matchUser } from "../api";
 import Swal from "sweetalert2";
+import { Button, Label, TextInput } from "flowbite-react";
 
 function LoginPages() {
   const [dataLogin, setDataLogin] = useState({
@@ -10,14 +11,14 @@ function LoginPages() {
   });
 
   const handleChange = (e) => {
-    setDataLogin({ ...dataLogin, [e.target.name]: e.target.value });
+    setDataLogin({ ...dataLogin, [e.target.id]: e.target.value });
   };
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const dataJuri = await matchUser(dataLogin);
     if (dataJuri) {
       localStorage.setItem("juri", JSON.stringify(dataJuri));
-
       window.location.href = "/";
     } else {
       Swal.fire({
@@ -34,55 +35,43 @@ function LoginPages() {
         <div className="w-full p-4 text-xl font-semibold rounded-t-lg md:text-2xl bg-sky-800 text-slate-50">
           Masuk ke Akun Anda
         </div>
-        <form className="container flex flex-col p-4 mx-auto rounded-b-lg bg-slate-50 text-slate-900">
-          {/* Username */}
-          <div className="w-full mb-4 space-y-2 text-slate-800">
-            <label htmlFor="username" className="block text-lg font-medium">
-              Username
-            </label>
-            <div className="flex">
-              <span className="flex items-center px-3 text-sm pointer-events-none rounded-l-md bg-sky-300">
-                <UserCircle size={30} />
-              </span>
-              <input
-                type="text"
-                name="username"
-                id="username"
-                placeholder="Username..."
-                className="flex flex-1 h-10 p-4 text-sm text-gray-800 bg-gray-100 border border-gray-300 rounded-r-md focus:ring-inset focus:ring-sky-600"
-                autoComplete="off"
-                onChange={handleChange}
-              />
+        <form
+          className="flex flex-col max-w-md gap-4 p-4"
+          onSubmit={handleSubmit}
+        >
+          <div>
+            <div className="block mb-2">
+              <Label htmlFor="username" value="Username" />
             </div>
+            <TextInput
+              id="username"
+              type="text"
+              placeholder="username..."
+              icon={UserCircle}
+              required
+              onChange={handleChange}
+            />
           </div>
-          {/* Password */}
-          <div className="w-full mb-4 space-y-2 text-slate-800">
-            <label htmlFor="password" className="text-lg font-medium">
-              Password
-            </label>
-            <div className="flex">
-              <span className="flex items-center px-3 pointer-events-none sm:text-sm rounded-l-md bg-sky-300">
-                <LockKey size={30} />
-              </span>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="*****"
-                className="flex flex-1 h-10 p-4 text-gray-800 bg-gray-100 border border-gray-300 sm:text-sm rounded-r-md focus:ring-inset focus:ring-sky-600"
-                autoComplete="off"
-                onChange={handleChange}
-              />
+          <div>
+            <div className="block mb-2">
+              <Label htmlFor="password" value="Password" />
             </div>
+            <TextInput
+              id="password"
+              type="password"
+              placeholder="* * * * *"
+              icon={LockKey}
+              required
+              onChange={handleChange}
+            />
           </div>
-          {/* Button */}
-          <button
-            className="w-full h-10 mt-4 font-semibold rounded text-slate-50 bg-sky-800 hover:bg-sky-600"
-            type="button"
+          <Button
+            type="submit"
             onClick={handleSubmit}
+            className="w-full bg-sky-800 hover:bg-sky-600"
           >
-            LOGIN
-          </button>
+            Submit
+          </Button>
         </form>
       </div>
     </div>
