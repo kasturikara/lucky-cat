@@ -28,3 +28,30 @@ export async function getJuri() {
 
   return data;
 }
+
+// kategori
+export async function getKategori() {
+  const { data, error } = await supabase
+    .from("kategori")
+    .select("*")
+    .order("id", { ascending: true });
+  if (!data || error) {
+    console.error(error);
+    return;
+  }
+  return data;
+}
+
+// subs pbb
+export async function getSubsByJenis(jenis) {
+  const { data, error } = await supabase
+    .from("subs")
+    .select("*")
+    .eq("jenis", jenis)
+    .order("kode", { ascending: true });
+  if (!data || error) {
+    console.error(error);
+    return;
+  }
+  return data;
+}
